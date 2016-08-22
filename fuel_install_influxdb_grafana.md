@@ -47,6 +47,7 @@
   2. 控制节点和计算节点的collectd配置文件不同的地方
       配置文件为```/etc/collectd/conf.d/python-config.conf```
       以下为控制节点的配置内容信息
+
   3. 控制节点里包含各个节点的api链接，如`openstack_cinder，hypervisor_stats，openstack_glance，openstack_keystone，openstack_neutron，openstack_nova`等模块的api地址和密码等
 ----
 #### 排查方法
