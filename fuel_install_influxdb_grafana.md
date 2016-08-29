@@ -77,7 +77,6 @@
 >
      • InfluxDB – /var/log/influxdb/influxdb.log
      • Grafana – /var/log/grafana/grafana.log
-
 ---
   <font color=red size=3>collector客户端:</font> 
 
