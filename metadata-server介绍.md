@@ -67,6 +67,7 @@ curl http://169.254.169.254/latest/meta-data
 ```
 - 虚拟机内部没有特殊的路由，所以数据包会直接发送到虚拟机的默认网关，而默认网关是在network node上
 
+---
 2. namespace-metadata-proxy
 - 因为使用了namespace，在network node上每个namespace里都会有相应的iptables规则和网络设备
 
@@ -109,10 +110,27 @@ id --metadata_proxy_socket=/var/lib/neutron/metadata_proxy
 --log-dir=/var/log/neutron
 
 ```
+- 对应代码块
+```
+$vim  /usr/lib/python2.7/dist-packages/neutron/agent/metadata/namespace_proxy.py
+   
+    def _proxy_request(self, remote_address, method, path_info,
+                       query_string, body):
+        headers = {
+            'X-Forwarded-For': remote_address,
+        }
+
+        if self.router_id:
+            headers['X-Neutron-Router-ID'] = self.router_id
+        else:
+            headers['X-Neutron-Network-ID'] = self.network_id
+```
+
 - 可见，启用namespace场景下，对于每一个router，都会创建这样一个进程。该进程监听8775端口，其主要功能：
 - 向请求头部添加X-Forwarded-For和X-neutron-Router-ID，分别表示虚拟机的fixedIP和router的ID
 - 将请求代理至Unix domain socket（/var/lib/neutron/metadata_proxy）
 
+---
 3. neutron Metadata Agent
 - network node上的metadata agent监听/var/lib/neutron/metadata_proxy：
 ```
@@ -126,4 +144,27 @@ neutron  24409     1  0 Aug25 ?        00:01:10 /usr/bin/python2.7
 --config-file=/etc/neutron/metadata_agent.ini 
 --log-file=/var/log/neutron/metadata-agent.log
 ```
+- 对应代码块
+```
+$vim /usr/lib/python2.7/dist-packages/neutron/agent/metadata/agent.py
+
+@webob.dec.wsgify(RequestClass=webob.Request)
+    def __call__(self, req):
+        try:
+            LOG.debug("Request: %s", req)
+
+            instance_id, tenant_id = self._get_instance_and_tenant_id(req)
+            if instance_id:
+                return self._proxy_request(instance_id, tenant_id, req)
+            else:
+                return webob.exc.HTTPNotFound()
+
+        except Exception:
+            LOG.exception(_LE("Unexpected error."))
+            msg = _('An unknown error has occurred. '
+                    'Please try your request again.')
+            explanation = six.text_type(msg)
+            return webob.exc.HTTPInternalServerError(explanation=explanation)
+```
+
 - 该进程的功能是，根据请求头部的X-Forwarded-For和X-Quantum-Router-ID参数，向Quantum service查询虚拟机ID，然后向Nova Metadata服务发送请求（默认端口8775），消息头：X-Forwarded-For，X-Instance-ID、X-Instance-ID-Signature分别表示虚拟机的fixedIP，虚拟机ID和虚拟机ID的签名。
