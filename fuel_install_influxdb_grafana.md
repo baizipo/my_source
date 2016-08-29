@@ -17,6 +17,7 @@
      ```
      [root@fuel ~]# fuel plugins --install influxdb_grafana-0.10-0.10.0-1.noarch.rpm
      ``` 
+
   2. 安装collector插件
      ```
      [root@fuel ~]# fuel plugins --install lma_collector-0.10-0.10.0-1.noarch.rpm
