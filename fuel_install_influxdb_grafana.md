@@ -3,13 +3,13 @@
 
 #### 安装InfluxDB-Grafana和Collector插件
 
-     - > InfluxDB-Grafana 服务端安装软件
-     - > Collector 客户端安装软件
+    - > InfluxDB-Grafana 服务端安装软件
+    - > Collector 客户端安装软件
 
  一.官网下载插件，下载完成后拷贝到fuel节点上
 
-    - [influxdb_grafana](http://plugins.mirantis.com/repository/l/m/lma_collector/lma_collector-0.10-0.10.0-1.noarch.rpm)
-    - [Collector](http://plugins.mirantis.com/repository/l/m/lma_collector/lma_collector-0.10-0.10.0-1.noarch.rpm)
+  - [influxdb_grafana](http://plugins.mirantis.com/repository/l/m/lma_collector/lma_collector-0.10-0.10.0-1.noarch.rpm)
+  - [Collector](http://plugins.mirantis.com/repository/l/m/lma_collector/lma_collector-0.10-0.10.0-1.noarch.rpm)
 
  二.安装插件(文档使用rpm包方式安装)    
 
@@ -39,8 +39,8 @@
   2. 修改编辑配置文件
        基本上保持默认就可以,当然有些选项可以按需修改   
      
-       - > 详情可参考[influxdb_grafana官方文档](http://plugins.mirantis.com/docs/i/n/influxdb_grafana/influxdb_grafana-0.10-0.10.0-1.pdf)
-       - > 详情可参考[Collector官方文档](http://plugins.mirantis.com/docs/l/m/lma_collector/lma_collector-0.10-0.10.0-1.pdf)
+     - > 详情可参考[influxdb_grafana官方文档](http://plugins.mirantis.com/docs/i/n/influxdb_grafana/influxdb_grafana-0.10-0.10.0-1.pdf)
+     - > 详情可参考[Collector官方文档](http://plugins.mirantis.com/docs/l/m/lma_collector/lma_collector-0.10-0.10.0-1.pdf)
  
 ----
 #### 遇到问题
@@ -84,6 +84,7 @@
 
     - InfluxDB – /var/log/influxdb/influxdb.log
     - Grafana – /var/log/grafana/grafana.log
+
 ---
   <font color=red size=3>collector客户端:</font> 
 
