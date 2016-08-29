@@ -51,8 +51,11 @@ metadata=metadata {
 
 - 虚拟机通过cloud-init组件请求169.254.169.254这个地址的metadata服务，这时这个请求会有两种方式处理
 - 先看架构图,虚拟机是用metadata的流程，与neutron的结合使用:
-![](D:\image\api-agent.jpeg)
+
+![](https://github.com/baizipo/my_source/tree/master/image/api-agent.jpeg)
+
 > 当虚拟机所在的子网拥有网关而且连接了l3-router，则通过qrouter的namespace中的iptables处理； 当虚拟机所在的子网没有网关，是个封闭的子网，那么dhcp服务的虚拟网卡会添加一个169.254.169.254的ip；接收的cloud-init请求由ns-metadata-proxy处理，ns-metadata-proxy与metadata-agent通过unix domain socket实现IPC，实现将对ns-metadata-proxy的请求交给metadata-agent处理。metadata-agent接收请求，将请求交给metadata-server的真实实现者nova-api。
+
 ---
 
 - [ ] 虚拟机所在子网连接了l3-router的处理方式
