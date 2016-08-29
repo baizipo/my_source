@@ -51,11 +51,8 @@ metadata=metadata {
 
 - 虚拟机通过cloud-init组件请求169.254.169.254这个地址的metadata服务，这时这个请求会有两种方式处理
 - 先看架构图,虚拟机是用metadata的流程，与neutron的结合使用:
-
-![](https://github.com/baizipo/my_source/tree/master/image/api-agent.jpeg)
-
+![](D:\image\api-agent.jpeg)
 > 当虚拟机所在的子网拥有网关而且连接了l3-router，则通过qrouter的namespace中的iptables处理； 当虚拟机所在的子网没有网关，是个封闭的子网，那么dhcp服务的虚拟网卡会添加一个169.254.169.254的ip；接收的cloud-init请求由ns-metadata-proxy处理，ns-metadata-proxy与metadata-agent通过unix domain socket实现IPC，实现将对ns-metadata-proxy的请求交给metadata-agent处理。metadata-agent接收请求，将请求交给metadata-server的真实实现者nova-api。
-
 ---
 
 - [ ] 虚拟机所在子网连接了l3-router的处理方式
@@ -68,6 +65,7 @@ curl http://169.254.169.254/latest/meta-data
 - 虚拟机内部没有特殊的路由，所以数据包会直接发送到虚拟机的默认网关，而默认网关是在network node上
 
 ---
+
 2. namespace-metadata-proxy
 - 因为使用了namespace，在network node上每个namespace里都会有相应的iptables规则和网络设备
 
@@ -125,12 +123,11 @@ $vim  /usr/lib/python2.7/dist-packages/neutron/agent/metadata/namespace_proxy.py
         else:
             headers['X-Neutron-Network-ID'] = self.network_id
 ```
-
 - 可见，启用namespace场景下，对于每一个router，都会创建这样一个进程。该进程监听8775端口，其主要功能：
 - 向请求头部添加X-Forwarded-For和X-neutron-Router-ID，分别表示虚拟机的fixedIP和router的ID
 - 将请求代理至Unix domain socket（/var/lib/neutron/metadata_proxy）
-
 ---
+
 3. neutron Metadata Agent
 - network node上的metadata agent监听/var/lib/neutron/metadata_proxy：
 ```
