@@ -60,7 +60,7 @@ metadata=metadata {
 
 - [ ] 虚拟机所在子网连接了l3-router的处理方式
 
-1. 虚拟机发送请求
+#### 虚拟机发送请求
 - 虚拟机启动时会访问169.254.169.254获取一些内容
 ```
 curl http://169.254.169.254/latest/meta-data
@@ -69,7 +69,7 @@ curl http://169.254.169.254/latest/meta-data
 
 ---
 
-2. namespace-metadata-proxy
+#### namespace-metadata-proxy
 - 因为使用了namespace，在network node上每个namespace里都会有相应的iptables规则和网络设备
 
 - 查看对应的iptables规则
@@ -129,9 +129,10 @@ $vim  /usr/lib/python2.7/dist-packages/neutron/agent/metadata/namespace_proxy.py
 - 可见，启用namespace场景下，对于每一个router，都会创建这样一个进程。该进程监听8775端口，其主要功能：
 - 向请求头部添加X-Forwarded-For和X-neutron-Router-ID，分别表示虚拟机的fixedIP和router的ID
 - 将请求代理至Unix domain socket（/var/lib/neutron/metadata_proxy）
+
 ---
 
-3. neutron Metadata Agent
+#### neutron Metadata Agent
 - network node上的metadata agent监听/var/lib/neutron/metadata_proxy：
 ```
 $netstat -lxp | grep metadata 
