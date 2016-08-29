@@ -3,8 +3,8 @@
 
 #### 安装InfluxDB-Grafana和Collector插件
 
-   - > InfluxDB-Grafana 服务端安装软件
-   - > Collector 客户端安装软件
+   - InfluxDB-Grafana 服务端安装软件
+   - Collector 客户端安装软件
 
  一.官网下载插件，下载完成后拷贝到fuel节点上
 
@@ -32,6 +32,7 @@
     ```
 ----
 #### fuel配置
+
   1. 登陆fuel节点
        在将插件安装完成过后，选择```环境-我的openstack环境-设置-其他配置```可以看到新安装的两个插件的配置信息，选中
        ```The StackLight InfluxDB-Grafana Server Plugin```和```The StackLight Collector Plugin```前面的复选框。
@@ -43,6 +44,7 @@
       - 详情可参考[Collector官方文档](http://plugins.mirantis.com/docs/l/m/lma_collector/lma_collector-0.10-0.10.0-1.pdf)
  
 ----
+
 #### 遇到问题
   1. 安装后无法获取数据，原因控制器节点和influxdb节点控制网络不通
 
