@@ -2,32 +2,33 @@
 ----
 
 #### 安装InfluxDB-Grafana和Collector插件
- - > InfluxDB-Grafana 服务端安装软件
- - > Collector 客户端安装软件
 
-  一.官网下载插件，下载完成后拷贝到fuel节点上
+  - > InfluxDB-Grafana 服务端安装软件
+  - > Collector 客户端安装软件
+
+ 一.官网下载插件，下载完成后拷贝到fuel节点上
 
  - [influxdb_grafana](http://plugins.mirantis.com/repository/l/m/lma_collector/lma_collector-0.10-0.10.0-1.noarch.rpm)
  - [Collector](http://plugins.mirantis.com/repository/l/m/lma_collector/lma_collector-0.10-0.10.0-1.noarch.rpm)
 
-  二.安装插件(文档使用rpm包方式安装)    
+ 二.安装插件(文档使用rpm包方式安装)    
 
   1. 安装influxdb_grafana插件
 ```
-        [root@fuel ~]# fuel plugins --install influxdb_grafana-0.10-0.10.0-1.noarch.rpm
+     [root@fuel ~]# fuel plugins --install influxdb_grafana-0.10-0.10.0-1.noarch.rpm
 ``` 
   2. 安装collector插件
 ```
-        [root@fuel ~]# fuel plugins --install lma_collector-0.10-0.10.0-1.noarch.rpm
+     [root@fuel ~]# fuel plugins --install lma_collector-0.10-0.10.0-1.noarch.rpm
 ```
      
   3. 确认插件是否安装成功，如下表示安装成功
 ```
-         [root@fuel ~]# fuel plugins --list
-          id | name             | version | package_version | releases                                     
-           ---+------------------+---------+-----------------+----------------------------------------------
-          1  | influxdb_grafana | 0.10.0  | 4.0.0         | ubuntu (liberty-8.0, liberty-9.0, mitaka-9.0)
-          2  | lma_collector      | 0.10.0  | 4.0.0         | ubuntu (liberty-8.0, liberty-9.0, mitaka-9.0) 
+     [root@fuel ~]# fuel plugins --list
+     id | name             | version | package_version | releases                                     
+     ---+------------------+---------+-----------------+----------------------------------------------
+     1  | influxdb_grafana | 0.10.0  | 4.0.0         | ubuntu (liberty-8.0, liberty-9.0, mitaka-9.0)
+     2  | lma_collector      | 0.10.0  | 4.0.0         | ubuntu (liberty-8.0, liberty-9.0, mitaka-9.0) 
 ```
 ----
 #### fuel配置
