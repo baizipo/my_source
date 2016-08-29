@@ -30,14 +30,12 @@
      1  | influxdb_grafana | 0.10.0  | 4.0.0         | ubuntu (liberty-8.0, liberty-9.0, mitaka-9.0)
      2  | lma_collector      | 0.10.0  | 4.0.0         | ubuntu (liberty-8.0, liberty-9.0, mitaka-9.0) 
     ```
-----
-#### fuel配置
 
-  1. 登陆fuel节点
+  4. 登陆fuel节点
        在将插件安装完成过后，选择```环境-我的openstack环境-设置-其他配置```可以看到新安装的两个插件的配置信息，选中
        ```The StackLight InfluxDB-Grafana Server Plugin```和```The StackLight Collector Plugin```前面的复选框。
  
-  2. 修改编辑配置文件
+  5. 修改编辑配置文件
        基本上保持默认就可以,当然有些选项可以按需修改   
      
       - 详情可参考[influxdb_grafana官方文档](http://plugins.mirantis.com/docs/i/n/influxdb_grafana/influxdb_grafana-0.10-0.10.0-1.pdf)
