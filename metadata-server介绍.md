@@ -68,6 +68,7 @@ curl http://169.254.169.254/latest/meta-data
 - 虚拟机内部没有特殊的路由，所以数据包会直接发送到虚拟机的默认网关，而默认网关是在network node上
 
 ---
+
 2. namespace-metadata-proxy
 - 因为使用了namespace，在network node上每个namespace里都会有相应的iptables规则和网络设备
 
@@ -125,12 +126,11 @@ $vim  /usr/lib/python2.7/dist-packages/neutron/agent/metadata/namespace_proxy.py
         else:
             headers['X-Neutron-Network-ID'] = self.network_id
 ```
-
 - 可见，启用namespace场景下，对于每一个router，都会创建这样一个进程。该进程监听8775端口，其主要功能：
 - 向请求头部添加X-Forwarded-For和X-neutron-Router-ID，分别表示虚拟机的fixedIP和router的ID
 - 将请求代理至Unix domain socket（/var/lib/neutron/metadata_proxy）
-
 ---
+
 3. neutron Metadata Agent
 - network node上的metadata agent监听/var/lib/neutron/metadata_proxy：
 ```
