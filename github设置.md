@@ -111,6 +111,17 @@ git rebase chinadevops-master
 ```
 git push origin master:master
 ```
+---
+版本回退
 
+- 先使用git reflog 查看需要回退到的点
+```
+git reflog
 
-
+69e01f5 HEAD@{3}: commit: [图片]
+c52b4b6 HEAD@{4}: checkout: moving from master to myself
+```
+- 如回退到69e01f5
+```
+git reset --hard 69e01f5
+```
