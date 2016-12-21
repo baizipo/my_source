@@ -4,10 +4,12 @@
   - 准备Fuel9.0光盘或优盘启动盘
 
   - 安装Fuel节点
+  
      1.Fuel节点boot from cd/dvd or 从优盘启动安装
 
      2.选择第一项,如下图,
-       ![](https://github.com/baizipo/my_source/blob/master/image/Fuel/fuel.png)
+
+     ![](https://github.com/baizipo/my_source/blob/master/image/Fuel/fuel.png)
  
   - 配置Fuel参数,需要更改的几项如下:
 
